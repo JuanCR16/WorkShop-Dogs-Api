@@ -1,0 +1,13 @@
+version: '3'
+services:
+  redis-server:
+    image: 'redis'
+  node-app:
+    build: ./api
+    command: nodemon --inspect=0.0.0.0:9229 ./src/server.js 3000
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    volumes:
+      - ./api:/app # current folder mapped to the /app inside the container
+      - /app/node_modules # do not try to map node_modules
